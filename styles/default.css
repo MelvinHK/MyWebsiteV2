@@ -9,7 +9,7 @@ body {
   display: flex;
   justify-content: center;
   padding: var(--root-padding);
-  height: calc(100vh - var(--root-padding)*2);
+  min-height: calc(100vh - var(--root-padding)*2);
 }
 
 h1,
