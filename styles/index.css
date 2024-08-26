@@ -12,11 +12,9 @@
 }
 
 #container {
-  position: absolute;
-  height: calc(calc(100% - var(--root-padding) * 2));
   display: flex;
   width: var(--container-width);
-  max-width: calc(calc(100% - var(--root-padding) * 2));
+  max-width: 100%;
   animation: fade-in 1.5s;
 }
 
@@ -100,7 +98,7 @@
   }
 }
 
-/********** NAV BOOKMARK **********/
+/********** BOOKMARK BUTTON **********/
 
 #bookmark-wrapper {
   position: fixed;
@@ -134,29 +132,6 @@
   align-self: center;
   margin: auto;
   margin-top: 30px;
-}
-
-#bookmark::before {
-  content: "";
-  width: 50px;
-  position: absolute;
-  left: 0;
-  height: 500px;
-  margin-top: -500px;
-  background-color: var(--accent-col);
-  transform-origin: top;
-}
-
-#bookmark-menu {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  text-align: right;
-  gap: 1rem;
-  right: calc(50px + 1rem);
-  margin-top: var(--root-padding);
-  opacity: 0;
-  pointer-events: none;
 }
 
 /********** GENERAL **********/
