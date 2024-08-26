@@ -35,7 +35,3 @@ function handleNav(data) {
     })
   ];
 }
-
-document.getElementById('bookmark').addEventListener('click', () => {
-  
-});
