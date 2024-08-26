@@ -13,20 +13,46 @@ barba.init({
       });
     },
     enter(data) {
-      return getNavTransition(data.next.url.path);
+      return handleNav(data);
     },
     once(data) {
-      return getNavTransition(data.next.url.path);
+      return handleNav(data);
     }
   }],
 });
 
-function getNavTransition(path) {
-  const nav = document.getElementsByClassName('bookmark');
-  const isHome = (path === '/' || path === '/index.html');
+function handleNav(data) {
+  const nav = document.getElementById('bookmark');
+  const menu = document.getElementById('bookmark-menu');
 
-  return gsap.to(nav, {
-    translateY: isHome ? '0px' : '100px',
-    ease: `power1.${isHome ? 'in' : 'out'}`,
-  });
+  const nextUrl = data.next.url.path;
+  const isHome = (nextUrl === '/' || nextUrl === '/index.html');
+
+  nav.disabled = isHome;
+
+  return [
+    gsap.to(nav, {
+      translateY: isHome ? '0px' : '100px',
+      ease: `power1.${isHome ? 'in' : 'out'}`,
+    }),
+    gsap.to(menu, {
+      opacity: 0,
+      pointerEvents: "none"
+    })
+  ];
 }
+
+document.getElementById('bookmark').addEventListener('click', (e) => {
+  const nav = e.currentTarget;
+  const menu = document.getElementById('bookmark-menu');
+  const isOpen = gsap.getProperty(nav, 'y') !== 100;
+
+  gsap.to(menu, {
+    opacity: isOpen ? 0 : 1,
+    pointerEvents: isOpen ? "none" : "all"
+  });
+
+  gsap.to(nav, {
+    translateY: isOpen ? 100 : '250%'
+  });
+});

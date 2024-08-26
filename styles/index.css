@@ -13,7 +13,7 @@
 
 #container {
   position: absolute;
-  height: calc(calc(100% - var(--root-padding) * 2));;
+  height: calc(calc(100% - var(--root-padding) * 2));
   display: flex;
   width: var(--container-width);
   max-width: calc(calc(100% - var(--root-padding) * 2));
@@ -24,10 +24,6 @@
   0% {
     opacity: 0;
   }
-}
-
-#container>* {
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .content {
@@ -69,7 +65,7 @@
   width: 8rem;
   text-align: center;
   user-select: none;
-  transition: 0.35s;
+  transition: background-color, box-shadow 0.35s;
   cursor: pointer;
   opacity: 0;
 }
@@ -106,16 +102,19 @@
 
 /********** NAV BOOKMARK **********/
 
-.bookmark-wrapper {
+#bookmark-wrapper {
   position: fixed;
   top: 0;
   display: flex;
   width: var(--container-width);
   max-width: calc(100% - calc(var(--root-padding) * 2));
+  height: max-content;
+  z-index: 2;
 }
 
-.bookmark {
+#bookmark {
   display: flex;
+  position: relative;
   width: 50px;
   height: 100px;
   margin-top: -100px;
@@ -123,9 +122,11 @@
   background: url('/bookmark.svg');
   background-position: -25px;
   background-size: cover;
+  border: transparent;
+  cursor: pointer;
 }
 
-.bookmark::after {
+#bookmark::after {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 25px;
   content: "M";
@@ -133,6 +134,29 @@
   align-self: center;
   margin: auto;
   margin-top: 30px;
+}
+
+#bookmark::before {
+  content: "";
+  width: 50px;
+  position: absolute;
+  left: 0;
+  height: 500px;
+  margin-top: -500px;
+  background-color: var(--accent-col);
+  transform-origin: top;
+}
+
+#bookmark-menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  gap: 1rem;
+  right: calc(50px + 1rem);
+  margin-top: var(--root-padding);
+  opacity: 0;
+  pointer-events: none;
 }
 
 /********** GENERAL **********/
