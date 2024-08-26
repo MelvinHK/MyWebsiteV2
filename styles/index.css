@@ -1,7 +1,13 @@
 :root {
   --container-width: 50rem;
   --title-font-size: clamp(3rem, min(15vw, 15vh), 8rem);
-  --root-padding: 1.5rem
+  --root-padding: 1.5rem;
+
+  --font-col: #7e80a2;
+  --accent-col: #f7996e;
+  --link-col: #76c2f1;
+  --bg-col: #fcfcfc;
+  --shadow-col: #7e80a238;
 }
 
 #container {
@@ -66,9 +72,8 @@
 }
 
 #title-menu a:hover {
-  box-shadow: 0.5rem 0.5rem 0.5rem #7e80a238;
+  box-shadow: 0.5rem 0.5rem 0.5rem var(--shadow-col);
   background-color: white;
-  /* font-size: large; */
 }
 
 #title-menu a:nth-child(1) {
@@ -96,13 +101,34 @@
   }
 }
 
+/********** NAV BOOKMARK **********/
+
+.bookmark {
+  width: 50px;
+  height: 80px;
+  background-color: var(--accent-col);
+  position: relative;
+}
+
+.bookmark:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 40px solid var(--accent-col);
+}
+
 /********** GENERAL **********/
 
 .accent-col {
-  color: #f7996e;
+  color: var(--accent-col);
 }
 
 .link {
   text-decoration: underline;
-  color: #76c2f1;
+  color: var(--link-col);
 }
