@@ -6,10 +6,12 @@ body {
 }
 
 body {
+  position: relative;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   padding: var(--root-padding);
-  min-height: calc(100vh - var(--root-padding)*2);
+  min-height: 100vh;
 }
 
 h1,

@@ -1,5 +1,6 @@
 :root {
   --container-width: 50rem;
+
   --title-font-size: clamp(3rem, min(15vw, 15vh), 8rem);
   --root-padding: 1.5rem;
 
@@ -11,9 +12,11 @@
 }
 
 #container {
+  position: absolute;
+  height: calc(calc(100% - var(--root-padding) * 2));;
   display: flex;
   width: var(--container-width);
-  max-width: 100%;
+  max-width: calc(calc(100% - var(--root-padding) * 2));
   animation: fade-in 1.5s;
 }
 
@@ -103,23 +106,33 @@
 
 /********** NAV BOOKMARK **********/
 
-.bookmark {
-  width: 50px;
-  height: 80px;
-  background-color: var(--accent-col);
-  position: relative;
+.bookmark-wrapper {
+  position: fixed;
+  top: 0;
+  display: flex;
+  width: var(--container-width);
+  max-width: calc(100% - calc(var(--root-padding) * 2));
 }
 
-.bookmark:before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-left: 25px solid transparent;
-  border-right: 25px solid transparent;
-  border-top: 40px solid var(--accent-col);
+.bookmark {
+  display: flex;
+  width: 50px;
+  height: 100px;
+  margin-top: -100px;
+  margin-left: auto;
+  background: url('/bookmark.svg');
+  background-position: -25px;
+  background-size: cover;
+}
+
+.bookmark::after {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 25px;
+  content: "M";
+  color: var(--bg-col);
+  align-self: center;
+  margin: auto;
+  margin-top: 30px;
 }
 
 /********** GENERAL **********/
