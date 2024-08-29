@@ -31,7 +31,7 @@ function isHomeUrl(url) {
 function animations(data) {
   return [
     hideHeaderIf(isHomeUrl(data.next.url.path)),
-    indicateCurrentPageOption(data)
+    indicateSelectedMenuOption(data)
   ];
 }
 
@@ -70,7 +70,7 @@ function hideHeaderIf(hideCondition) {
   ];
 }
 
-function indicateCurrentPageOption(data) {
+function indicateSelectedMenuOption(data) {
   const currentPageTitle = data.next.namespace;
 
   const matchingOptionAnimation = (currentPageTitle === 'Home')
