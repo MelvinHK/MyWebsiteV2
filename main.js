@@ -31,7 +31,7 @@ function isHomeUrl(url) {
 function animations(data) {
   return [
     hideHeaderIf(isHomeUrl(data.next.url.path)),
-    indicateCurrentPage(data)
+    indicateCurrentPageOption(data)
   ];
 }
 
@@ -43,6 +43,9 @@ window.onscroll = function () {
   this.oldScroll = this.scrollY;
 };
 
+/**
+ * @param {boolean} hideCondition 
+ */
 function hideHeaderIf(hideCondition) {
   const homeButton = document.getElementById('home');
   const menu = document.getElementById('header-menu');
@@ -67,29 +70,24 @@ function hideHeaderIf(hideCondition) {
   ];
 }
 
-function indicateCurrentPage(data) {
+function indicateCurrentPageOption(data) {
   const currentPageTitle = data.next.namespace;
-  const otherPageTitles = Array.from(document.getElementById('header-menu').children)
-    .map(item => item.attributes.title.value)
-    .filter(title => title !== currentPageTitle);
 
-  const matchingMenuOption = document.getElementById(currentPageTitle);
-  const otherMenuOptions = otherPageTitles.map(title => document.getElementById(title));
-
-  const matchingMenuOptionAnimation = (currentPageTitle === 'Home')
+  const matchingOptionAnimation = (currentPageTitle === 'Home')
     ? null
-    : gsap.set(matchingMenuOption, {
+    : gsap.set(document.getElementById(currentPageTitle), {
       '--header-menu-a-width': '1rem'
     });
 
-  const otherMenuOptionsAnimations = otherMenuOptions.map(option =>
-    gsap.set(option, {
+  const otherOptionsAnimations = Array
+    .from(document.getElementById('header-menu').children)
+    .filter(item => item.attributes.title.value !== currentPageTitle)
+    .map(element => gsap.set(element, {
       '--header-menu-a-width': '0rem'
-    })
-  );
+    }));
 
   return [
-    matchingMenuOptionAnimation,
-    otherMenuOptionsAnimations
+    matchingOptionAnimation,
+    otherOptionsAnimations
   ];
 }
