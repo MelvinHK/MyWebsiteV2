@@ -1,8 +1,10 @@
 :root {
-  --container-width: 50rem;
+  --container-width: 40rem;
 
   --title-font-size: clamp(3rem, min(15vw, 15vh), 8rem);
   --root-padding: 1.5rem;
+
+  --header-menu-a-width: 0;
 
   --font-col: #7e80a2;
   --accent-col: #f7996e;
@@ -26,7 +28,7 @@
 
 .content {
   width: 30rem;
-  margin: clamp(0px, 10vh, 5rem) auto;
+  margin: clamp(4rem, 10vh, 5rem) auto;
 }
 
 /********** HOME **********/
@@ -98,21 +100,58 @@
   }
 }
 
-/********** BOOKMARK BUTTON **********/
+/********** HEADER **********/
 
-#bookmark-wrapper {
+#header-wrapper {
   position: fixed;
   top: 0;
   display: flex;
   width: var(--container-width);
   max-width: calc(100% - calc(var(--root-padding) * 2));
-  height: max-content;
+  height: 100px;
   z-index: 2;
+  background-image: linear-gradient(var(--bg-col), 90%, #00000000);
 }
 
-#bookmark {
+#header-menu {
+  position: absolute;
+  align-self: center;
   display: flex;
+  gap: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  width: max-content;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#header-menu a {
+  border-radius: 2rem;
+  padding: 1rem;
+  height: 1rem;
+  width: 1rem;
+  display: flex;
+  justify-content: center;
   position: relative;
+}
+
+#header-menu a::after {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid var(--font-col);
+  width: var(--header-menu-a-width);
+  height: 1.2rem;
+  transition: width 0.35s;
+}
+
+#header-menu a:hover::after  {
+  width: 1rem;
+}
+
+#home {
+  display: flex;
   width: 50px;
   height: 100px;
   margin-top: -100px;
@@ -124,7 +163,7 @@
   cursor: pointer;
 }
 
-#bookmark::after {
+#home::after {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 25px;
   content: "M";

@@ -13,25 +13,65 @@ barba.init({
       });
     },
     enter(data) {
-      return handleNav(data);
+      return animations(data);
     },
     once(data) {
-      return handleNav(data);
+      return animations(data);
     }
   }],
 });
 
-function handleNav(data) {
-  const nav = document.getElementById('bookmark');
+function animations(data) {
+  return [
+    handleHeaderVisibility(data),
+    handleCurrentPageIndicator(data)
+  ];
+}
+
+function handleHeaderVisibility(data) {
+  const homeButton = document.getElementById('home');
+  const menu = document.getElementById('header-menu');
+
   const nextUrl = data.next.url.path;
   const isHome = (nextUrl === '/' || nextUrl === '/index.html');
 
-  nav.disabled = isHome;
+  homeButton.disabled = isHome;
 
   return [
-    gsap.to(nav, {
+    gsap.to(homeButton, {
       translateY: isHome ? '0px' : '100px',
       ease: `power1.${isHome ? 'in' : 'out'}`,
+    }),
+    gsap.to(menu, {
+      opacity: isHome ? 0 : 1,
+      pointerEvents: isHome ? "none" : "all"
     })
+  ];
+}
+
+function handleCurrentPageIndicator(data) {
+  const currentPageTitle = data.next.namespace;
+  const otherPageTitles = Array.from(document.getElementById('header-menu').children)
+    .map(item => item.attributes.title.value)
+    .filter(title => title !== currentPageTitle);
+
+  const matchingMenuOption = document.getElementById(currentPageTitle);
+  const otherMenuOptions = otherPageTitles.map(title => document.getElementById(title));
+
+  const matchingMenuOptionAnimation = (currentPageTitle === 'Home')
+    ? null
+    : gsap.set(matchingMenuOption, {
+      '--header-menu-a-width': '1rem'
+    });
+
+  const otherMenuOptionsAnimations = otherMenuOptions.map(option =>
+    gsap.set(option, {
+      '--header-menu-a-width': '0rem'
+    })
+  );
+
+  return [
+    matchingMenuOptionAnimation,
+    otherMenuOptionsAnimations
   ];
 }
