@@ -110,7 +110,7 @@
   max-width: calc(100% - calc(var(--root-padding) * 2));
   height: 100px;
   z-index: 2;
-  background-image: linear-gradient(var(--bg-col), 90%, #00000000);
+  background-image: linear-gradient(var(--bg-col), 90%, #fcfcfc00);
 }
 
 #header-menu {
