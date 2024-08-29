@@ -23,9 +23,10 @@ barba.init({
 
 function animations(data) {
   const nextUrl = data.next.url.path;
+  const isHome = (nextUrl === '/' || nextUrl === '/index.html');
 
   return [
-    hideHeader((nextUrl === '/' || nextUrl === '/index.html')),
+    hideHeader(isHome),
     indicateCurrentPage(data)
   ];
 }
