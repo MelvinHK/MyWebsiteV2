@@ -21,17 +21,29 @@ barba.init({
   }],
 });
 
-function animations(data) {
-  const nextUrl = data.next.url.path;
-  const isHome = (nextUrl === '/' || nextUrl === '/index.html');
+/**
+ * @param {string} url 
+ */
+function isHomeUrl(url) {
+  return ['/', '/index.html'].includes(url);
+}
 
+function animations(data) {
   return [
-    hideHeader(isHome),
+    hideHeaderIf(isHomeUrl(data.next.url.path)),
     indicateCurrentPage(data)
   ];
 }
 
-function hideHeader(hideCondition) {
+window.onscroll = function () {
+  if (isHomeUrl(window.location.pathname)) {
+    return;
+  }
+  hideHeaderIf(this.oldScroll < this.scrollY);
+  this.oldScroll = this.scrollY;
+};
+
+function hideHeaderIf(hideCondition) {
   const homeButton = document.getElementById('home');
   const menu = document.getElementById('header-menu');
   const headerWrapper = document.getElementById('header-wrapper');
