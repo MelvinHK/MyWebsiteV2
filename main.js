@@ -4,7 +4,6 @@ import gsap from 'gsap';
 barba.init({
   preventRunning: true,
   transitions: [{
-    name: 'opacity-transition',
     leave(data) {
       return gsap.to(data.current.container, {
         opacity: 0,
