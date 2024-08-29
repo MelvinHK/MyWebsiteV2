@@ -23,14 +23,15 @@ barba.init({
 
 function animations(data) {
   return [
-    handleHeaderVisibility(data),
-    handleCurrentPageIndicator(data)
+    hideHeader(data),
+    indicateCurrentPage(data)
   ];
 }
 
-function handleHeaderVisibility(data) {
+function hideHeader(data) {
   const homeButton = document.getElementById('home');
   const menu = document.getElementById('header-menu');
+  const headerWrapper = document.getElementById('header-wrapper');
 
   const nextUrl = data.next.url.path;
   const isHome = (nextUrl === '/' || nextUrl === '/index.html');
@@ -47,11 +48,14 @@ function handleHeaderVisibility(data) {
     gsap.to(menu, {
       opacity: isHome ? 0 : 1,
       pointerEvents: isHome ? "none" : "all"
+    }),
+    gsap.to(headerWrapper, {
+      opacity: isHome ? 0 : 1
     })
   ];
 }
 
-function handleCurrentPageIndicator(data) {
+function indicateCurrentPage(data) {
   const currentPageTitle = data.next.namespace;
   const otherPageTitles = Array.from(document.getElementById('header-menu').children)
     .map(item => item.attributes.title.value)

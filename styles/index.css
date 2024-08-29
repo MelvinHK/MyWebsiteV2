@@ -107,7 +107,7 @@
   top: 0;
   display: flex;
   width: var(--container-width);
-  max-width: calc(100% - calc(var(--root-padding) * 2));
+  max-width: 100%;
   height: 100px;
   z-index: 2;
   background-image: linear-gradient(var(--bg-col), 90%, #fcfcfc00);
@@ -157,6 +157,7 @@
   height: 100px;
   margin-top: -100px;
   margin-left: auto;
+  margin-right: var(--root-padding);
   background: url('/bookmark.svg');
   background-position: -25px;
   background-size: cover;
