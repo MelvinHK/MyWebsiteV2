@@ -81,7 +81,7 @@ function indicateCurrentPageOption(data) {
 
   const otherOptionsAnimations = Array
     .from(document.getElementById('header-menu').children)
-    .filter(item => item.attributes.title.value !== currentPageTitle)
+    .filter(element => element.attributes.title.value !== currentPageTitle)
     .map(element => gsap.set(element, {
       '--header-menu-a-width': '0rem'
     }));
