@@ -22,35 +22,34 @@ barba.init({
 });
 
 function animations(data) {
+  const nextUrl = data.next.url.path;
+
   return [
-    hideHeader(data),
+    hideHeader((nextUrl === '/' || nextUrl === '/index.html')),
     indicateCurrentPage(data)
   ];
 }
 
-function hideHeader(data) {
+function hideHeader(hideCondition) {
   const homeButton = document.getElementById('home');
   const menu = document.getElementById('header-menu');
   const headerWrapper = document.getElementById('header-wrapper');
 
-  const nextUrl = data.next.url.path;
-  const isHome = (nextUrl === '/' || nextUrl === '/index.html');
-
-  homeButton.tabIndex = isHome ? -1 : 0;
+  homeButton.tabIndex = hideCondition ? -1 : 0;
   Array.from(menu.children)
-    .forEach(option => option.tabIndex = isHome ? -1 : 0);
+    .forEach(option => option.tabIndex = hideCondition ? -1 : 0);
 
   return [
     gsap.to(homeButton, {
-      translateY: isHome ? '0px' : '100px',
-      ease: `power1.${isHome ? 'in' : 'out'}`,
+      translateY: hideCondition ? '0px' : '100px',
+      ease: `power1.${hideCondition ? 'in' : 'out'}`,
     }),
     gsap.to(menu, {
-      opacity: isHome ? 0 : 1,
-      pointerEvents: isHome ? "none" : "all"
+      opacity: hideCondition ? 0 : 1,
+      pointerEvents: hideCondition ? "none" : "all"
     }),
     gsap.to(headerWrapper, {
-      opacity: isHome ? 0 : 1
+      opacity: hideCondition ? 0 : 1
     })
   ];
 }
