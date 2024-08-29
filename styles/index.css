@@ -147,7 +147,8 @@
   transition: width 0.35s;
 }
 
-#header-menu a:hover::after  {
+#header-menu a:hover::after,
+#header-menu a:focus::after {
   width: 1rem;
 }
 
