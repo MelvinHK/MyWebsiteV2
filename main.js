@@ -2,6 +2,7 @@ import barba from '@barba/core';
 import gsap from 'gsap';
 
 barba.init({
+  preventRunning: true,
   transitions: [{
     name: 'opacity-transition',
     leave(data) {
