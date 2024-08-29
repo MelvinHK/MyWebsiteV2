@@ -35,7 +35,9 @@ function handleHeaderVisibility(data) {
   const nextUrl = data.next.url.path;
   const isHome = (nextUrl === '/' || nextUrl === '/index.html');
 
-  homeButton.disabled = isHome;
+  homeButton.tabIndex = isHome ? -1 : 0;
+  Array.from(menu.children)
+    .forEach(option => option.tabIndex = isHome ? -1 : 0);
 
   return [
     gsap.to(homeButton, {
