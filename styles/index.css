@@ -176,6 +176,23 @@
   margin-top: 30px;
 }
 
+/********** DIGITAL ART **********/
+
+.gallery {
+  display: grid;
+  align-self: center;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
+  grid-auto-rows: 300px;
+  grid-auto-flow: dense;
+}
+
+.gallery div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /********** GENERAL **********/
 
 .accent-col {
