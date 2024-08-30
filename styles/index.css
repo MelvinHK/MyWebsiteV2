@@ -111,6 +111,7 @@
   height: 100px;
   z-index: 2;
   background-image: linear-gradient(var(--bg-col), 90%, #fcfcfc00);
+  opacity: 0;
 }
 
 #header-menu {
@@ -123,7 +124,6 @@
   left: 0;
   right: 0;
   width: max-content;
-  opacity: 0;
   pointer-events: none;
 }
 

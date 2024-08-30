@@ -61,7 +61,6 @@ function hideHeaderIf(hideCondition) {
       ease: `power1.${hideCondition ? 'in' : 'out'}`,
     }),
     gsap.to(menu, {
-      opacity: hideCondition ? 0 : 1,
       pointerEvents: hideCondition ? "none" : "all"
     }),
     gsap.to(headerWrapper, {
