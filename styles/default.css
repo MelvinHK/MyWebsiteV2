@@ -4,6 +4,9 @@ body {
   color: var(--font-col);
   background-color: var(--bg-col);
   font-family: Arial, Helvetica, sans-serif;
+  scrollbar-gutter: stable both-edges;
+  scrollbar-color: var(--font-col) transparent;
+  scrollbar-width: thin;
 }
 
 body {
