@@ -180,17 +180,12 @@
 /********** DIGITAL ART **********/
 
 #gallery {
-  display: flex;
-  align-items: start;
-  overflow: auto;
-  scroll-snap-type: x mandatory;
   max-width: var(--content-width);
+  height: 100%;
 }
 
 #gallery img {
   width: 100%;
-  flex-shrink: 0;
-  scroll-snap-align: start;
 }
 
 /********** GENERAL **********/
