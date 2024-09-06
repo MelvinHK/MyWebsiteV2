@@ -39,7 +39,7 @@ window.onscroll = function () {
   if (isHomeUrl(window.location.pathname)) {
     return;
   }
-  hideHeaderIf(this.oldScroll < this.scrollY);
+  hideHeaderIf(this.oldScroll < this.scrollY && this.scrollY !== 0);
   this.oldScroll = this.scrollY;
 };
 
