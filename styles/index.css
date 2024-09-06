@@ -181,7 +181,7 @@
 
 #gallery {
   display: flex;
-  align-items: center;
+  align-items: start;
   overflow: auto;
   scroll-snap-type: x mandatory;
   max-width: var(--content-width);
