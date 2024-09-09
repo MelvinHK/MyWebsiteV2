@@ -7,16 +7,15 @@ barba.init({
     leave(data) {
       return gsap.to(data.current.container, {
         opacity: 0,
-        translateX: '-5rem',
-        duration: 0.25,
+        duration: 0.2,
         ease: 'power1.in'
       });
     },
     enter(data) {
-      return animations(data);
+      return init(data);
     },
     once(data) {
-      return animations(data);
+      return init(data);
     }
   }],
 });
@@ -28,7 +27,11 @@ function isHomeUrl(url) {
   return ['/', '/index.html'].includes(url);
 }
 
-function animations(data) {
+function init(data) {
+  if (data.next.namespace === "Digital Art") {
+    enableDragScroll(document.getElementById('gallery'));
+  }
+
   return [
     hideHeaderIf(isHomeUrl(data.next.url.path)),
     indicateSelectedMenuOption(data)
@@ -89,4 +92,36 @@ function indicateSelectedMenuOption(data) {
     matchingOptionAnimation,
     otherOptionsAnimations
   ];
+}
+
+/**
+ * @param {HTMLElement} container 
+ */
+function enableDragScroll(container) {
+  let pos = { top: 0, left: 0, x: 0, y: 0 };
+
+  const mouseMoveHandler = function (e) {
+    const dx = e.clientX - pos.x;
+    const dy = e.clientY - pos.y;
+    container.scrollTop = pos.top - dy;
+    container.scrollLeft = pos.left - dx;
+  };
+
+  const mouseUpHandler = function () {
+    document.removeEventListener('mousemove', mouseMoveHandler);
+    document.removeEventListener('mouseup', mouseUpHandler);
+  };
+
+  const mouseDownHandler = function (e) {
+    pos = {
+      left: container.scrollLeft,
+      top: container.scrollTop,
+      x: e.clientX,
+      y: e.clientY,
+    };
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler);
+  };
+
+  container.addEventListener('mousedown', mouseDownHandler);
 }
