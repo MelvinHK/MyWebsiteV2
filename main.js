@@ -123,5 +123,7 @@ function enableDragScroll(container) {
     document.addEventListener('mouseup', mouseUpHandler);
   };
 
+  // Because this function can be called multiple times, remove any previously added listeners.
+  container.removeEventListener('mousedown', mouseDownHandler);
   container.addEventListener('mousedown', mouseDownHandler);
 }
