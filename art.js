@@ -10,7 +10,7 @@ export function setImageEventListeners() {
     startY = event.pageY;
   };
 
-  const onClick = (event, clicked) => {
+  const onMouseUp = (event, clicked) => {
     const draggedX = Math.abs(event.pageX - startX);
     const draggedY = Math.abs(event.pageY - startY);
 
@@ -20,7 +20,7 @@ export function setImageEventListeners() {
   };
 
   const handleMouseDown = (e) => setNewXY(e);
-  const handleMouseUp = (e) => onClick(e, () => enlargeImage(e.target));
+  const handleMouseUp = (e) => onMouseUp(e, () => enlargeImage(e.target));
 
   for (const image of images) {
     image.removeEventListener('mousedown', handleMouseDown);
