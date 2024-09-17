@@ -1,6 +1,8 @@
 import barba from '@barba/core';
 import gsap from 'gsap';
 
+import { setImageEventListeners } from './art';
+
 barba.init({
   preventRunning: true,
   transitions: [{
@@ -30,6 +32,7 @@ function isHomeUrl(url) {
 function init(data) {
   if (data.next.namespace === "Digital Art") {
     enableDragScroll(document.getElementById('gallery'));
+    setImageEventListeners();
   }
 
   return [
