@@ -115,6 +115,13 @@
   opacity: 0;
 }
 
+@media (scripting: none) {
+  #header-wrapper {
+    margin-top: 100px;
+    opacity: 1;
+  }
+}
+
 #header-menu {
   position: absolute;
   align-self: center;
@@ -165,6 +172,12 @@
   background-size: cover;
   border: transparent;
   cursor: pointer;
+}
+
+@media (scripting: none) {
+  #home {
+    margin-top: 0px;
+  }
 }
 
 #home::after {
