@@ -1,4 +1,4 @@
-export function setImageEventListeners() {
+export function setImageClickListeners() {
   const images = document.getElementById('gallery').children;
 
   const clickThreshold = 6; // In pixels; if the dragged distance is less than this, it is a click.

@@ -1,7 +1,11 @@
 import barba from '@barba/core';
 import gsap from 'gsap';
 
-import { setImageEventListeners } from './art';
+import { setImageClickListeners } from './art';
+
+/**
+ * @overview - Main script for handling barba transitions, and initializing individual page scripts.
+ */
 
 barba.init({
   preventRunning: true,
@@ -29,10 +33,13 @@ function isHomeUrl(url) {
   return ['/', '/index.html'].includes(url);
 }
 
+/**
+ * Return animations here, and initialize individual pages' scripts.
+ */
 function init(data) {
   if (data.next.namespace === "Digital Art") {
     enableDragScroll(document.getElementById('gallery'));
-    setImageEventListeners();
+    setImageClickListeners();
   }
 
   return [
