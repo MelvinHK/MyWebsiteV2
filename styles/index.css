@@ -188,14 +188,11 @@
   height: 30rem;
   overflow: auto;
   position: absolute;
-  scrollbar-width: thin;
-  scrollbar-color: transparent transparent;
-  margin-top: 5px;
+  scrollbar-width: none;
 }
 
 #gallery:hover {
   cursor: grab;
-  scrollbar-color: var(--font-col) transparent;
 }
 
 #gallery:active {
@@ -204,6 +201,10 @@
 
 #gallery img {
   height: 100%;
+}
+
+#gallery-spacer {
+  height: 30rem;
 }
 
 /********** GENERAL **********/
