@@ -111,8 +111,16 @@
   max-width: 100%;
   height: 100px;
   z-index: 2;
-  background-image: linear-gradient(var(--bg-col), 95%, #fcfcfc00);
   opacity: 0;
+}
+
+#header-wrapper::before {
+  content: "";
+  position: fixed;
+  left: 0;
+  width: 100vw;
+  height: inherit;
+  background-image: linear-gradient(var(--bg-col), 95%, #fcfcfc00);
 }
 
 @media (scripting: none) {
