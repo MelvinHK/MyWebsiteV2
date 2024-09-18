@@ -56,17 +56,18 @@ window.onscroll = function () {
   this.oldScroll = this.scrollY;
 };
 
+// Cache header elements
+const homeButton = document.getElementById('home');
+const menu = document.getElementById('header-menu');
+const menuOptions = Array.from(menu.children);
+const headerWrapper = document.getElementById('header-wrapper');
+
 /**
  * @param {boolean} hideCondition 
  */
 function hideHeaderIf(hideCondition) {
-  const homeButton = document.getElementById('home');
-  const menu = document.getElementById('header-menu');
-  const headerWrapper = document.getElementById('header-wrapper');
-
   homeButton.tabIndex = hideCondition ? -1 : 0;
-  Array.from(menu.children)
-    .forEach(option => option.tabIndex = hideCondition ? -1 : 0);
+  menuOptions.forEach(option => option.tabIndex = hideCondition ? -1 : 0);
 
   return [
     gsap.to(homeButton, {
@@ -91,8 +92,7 @@ function indicateSelectedMenuOption(data) {
       '--header-menu-a-width': '1rem'
     });
 
-  const otherOptionsAnimations = Array
-    .from(document.getElementById('header-menu').children)
+  const otherOptionsAnimations = menuOptions
     .filter(element => element.attributes.title.value !== currentPageTitle)
     .map(element => gsap.set(element, {
       '--header-menu-a-width': '0rem'
