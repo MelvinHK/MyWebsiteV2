@@ -59,6 +59,7 @@ window.addEventListener('scroll', () => {
   const shouldHideHeader = isScrollingDown && !headerHidden;
   const shouldShowHeader = !isScrollingDown && headerHidden;
 
+  // E.g. If header is already hidden and user is scrolling down, skip this.
   if (shouldHideHeader || shouldShowHeader) {
     hideHeader(isScrollingDown);
     headerHidden = isScrollingDown;
