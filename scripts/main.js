@@ -50,17 +50,15 @@ function init(data) {
 
 let lastScrollY = 0;
 let headerHidden = false;
+
 window.addEventListener('scroll', () => {
   if (isHomeUrl(window.location.pathname)) {
     return;
   }
 
   const isScrollingDown = window.scrollY > lastScrollY;
-  const shouldHideHeader = isScrollingDown && !headerHidden;
-  const shouldShowHeader = !isScrollingDown && headerHidden;
 
-  // E.g. If header is already hidden and user is scrolling down, skip this.
-  if (shouldHideHeader || shouldShowHeader) {
+  if (isScrollingDown !== headerHidden) {
     hideHeader(isScrollingDown);
     headerHidden = isScrollingDown;
   }
