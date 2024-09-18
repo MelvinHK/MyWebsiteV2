@@ -43,18 +43,29 @@ function init(data) {
   }
 
   return [
-    hideHeaderIf(isHomeUrl(data.next.url.path)),
+    hideHeader(isHomeUrl(data.next.url.path)),
     indicateSelectedMenuOption(data)
   ];
 }
 
-window.onscroll = function () {
+let lastScrollY = 0;
+let headerHidden = false;
+window.addEventListener('scroll', () => {
   if (isHomeUrl(window.location.pathname)) {
     return;
   }
-  hideHeaderIf(this.oldScroll < this.scrollY && this.scrollY !== 0);
-  this.oldScroll = this.scrollY;
-};
+
+  const isScrollingDown = window.scrollY > lastScrollY;
+  const shouldHideHeader = isScrollingDown && !headerHidden;
+  const shouldShowHeader = !isScrollingDown && headerHidden;
+
+  if (shouldHideHeader || shouldShowHeader) {
+    hideHeader(isScrollingDown);
+    headerHidden = isScrollingDown;
+  }
+
+  lastScrollY = window.scrollY;
+});
 
 // Cache header elements
 const homeButton = document.getElementById('home');
@@ -63,22 +74,22 @@ const menuOptions = Array.from(menu.children);
 const headerWrapper = document.getElementById('header-wrapper');
 
 /**
- * @param {boolean} hideCondition 
+ * @param {boolean} condition - Optional boolean condition to hide header with.
  */
-function hideHeaderIf(hideCondition) {
-  homeButton.tabIndex = hideCondition ? -1 : 0;
-  menuOptions.forEach(option => option.tabIndex = hideCondition ? -1 : 0);
+function hideHeader(condition = true) {
+  homeButton.tabIndex = condition ? -1 : 0;
+  menuOptions.forEach(option => option.tabIndex = condition ? -1 : 0);
 
   return [
     gsap.to(homeButton, {
-      translateY: hideCondition ? '0px' : '100px',
-      ease: `power1.${hideCondition ? 'in' : 'out'}`,
+      translateY: condition ? '0px' : '100px',
+      ease: `power1.${condition ? 'in' : 'out'}`,
     }),
     gsap.to(menu, {
-      pointerEvents: hideCondition ? "none" : "all"
+      pointerEvents: condition ? "none" : "all"
     }),
     gsap.to(headerWrapper, {
-      opacity: hideCondition ? 0 : 1
+      opacity: condition ? 0 : 1
     })
   ];
 }
