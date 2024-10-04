@@ -37,14 +37,16 @@ function isHomeUrl(url) {
  * Return animations here, and initialize individual pages' scripts.
  */
 function init(data) {
-  if (data.next.namespace === "Digital Art") {
+  const nextNamespace = data.next.namespace;
+
+  if (nextNamespace === "Digital Art") {
     enableDragScroll(document.getElementById('gallery'));
     onImageClick((image) => enlargeImage(image));
   }
 
   return [
     hideHeader(isHomeUrl(data.next.url.path)),
-    indicateSelectedMenuOption(data)
+    indicateSelectedMenuOption(nextNamespace)
   ];
 }
 
@@ -93,17 +95,15 @@ function hideHeader(condition = true) {
   ];
 }
 
-function indicateSelectedMenuOption(data) {
-  const currentPageTitle = data.next.namespace;
-
-  const matchingOptionAnimation = (currentPageTitle === 'Home')
+function indicateSelectedMenuOption(nextNamespace) {
+  const matchingOptionAnimation = (nextNamespace === 'Home')
     ? null
-    : gsap.set(document.getElementById(currentPageTitle), {
+    : gsap.set(document.getElementById(nextNamespace), {
       '--header-menu-a-width': '1rem'
     });
 
   const otherOptionsAnimations = menuOptions
-    .filter(element => element.attributes.title.value !== currentPageTitle)
+    .filter(element => element.attributes.title.value !== nextNamespace)
     .map(element => gsap.set(element, {
       '--header-menu-a-width': '0rem'
     }));
