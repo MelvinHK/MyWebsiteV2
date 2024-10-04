@@ -1,4 +1,10 @@
-export function setImageClickListeners() {
+/**
+ * Since the gallery can be drag scrolled, default click listeners will not suffice.
+ * This function will differentiate between drag+release and clicks on the images.
+ * 
+ * @param {function(Element)} callback - A callback for when an image is clicked.
+ */
+export function onImageClick(callback) {
   const images = document.getElementById('gallery').children;
 
   const clickThreshold = 6; // In pixels; if the dragged distance is less than this, it is a click.
@@ -10,27 +16,27 @@ export function setImageClickListeners() {
     startY = event.pageY;
   };
 
-  const onMouseUp = (event, clicked) => {
+  const checkIfClicked = (event) => {
     const draggedX = Math.abs(event.pageX - startX);
     const draggedY = Math.abs(event.pageY - startY);
 
     if (draggedX < clickThreshold && draggedY < clickThreshold) {
-      clicked();
+      callback(event.target);
     }
   };
 
-  const handleMouseDown = (e) => setNewXY(e);
-  const handleMouseUp = (e) => onMouseUp(e, () => enlargeImage(e.target));
-
   for (const image of images) {
-    image.removeEventListener('mousedown', handleMouseDown);
-    image.removeEventListener('mouseup', handleMouseUp);
+    image.removeEventListener('mousedown', setNewXY);
+    image.removeEventListener('mouseup', checkIfClicked);
 
-    image.addEventListener('mousedown', handleMouseDown);
-    image.addEventListener('mouseup', handleMouseUp);
+    image.addEventListener('mousedown', setNewXY);
+    image.addEventListener('mouseup', checkIfClicked);
   }
 }
 
-function enlargeImage(image) {
+/**
+ * @param {Element} image 
+ */
+export function enlargeImage(image) {
   console.log(image.src);
 }

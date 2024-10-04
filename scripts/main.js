@@ -1,7 +1,7 @@
 import barba from '@barba/core';
 import gsap from 'gsap';
 
-import { setImageClickListeners } from './art';
+import { onImageClick, enlargeImage } from './art';
 
 /**
  * @overview - Main script for handling barba transitions, and initializing individual page scripts.
@@ -39,7 +39,7 @@ function isHomeUrl(url) {
 function init(data) {
   if (data.next.namespace === "Digital Art") {
     enableDragScroll(document.getElementById('gallery'));
-    setImageClickListeners();
+    onImageClick((image) => enlargeImage(image));
   }
 
   return [
@@ -143,7 +143,6 @@ function enableDragScroll(container) {
     document.addEventListener('mouseup', mouseUpHandler);
   };
 
-  // Because this function can be called multiple times, remove any previously added listeners.
   container.removeEventListener('mousedown', mouseDownHandler);
   container.addEventListener('mousedown', mouseDownHandler);
 }
