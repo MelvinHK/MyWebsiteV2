@@ -60,7 +60,6 @@ function isHomeUrl(url) {
 
 let lastScrollY = 0;
 let headerHidden = false;
-
 window.addEventListener('scroll', () => {
   if (isHomeUrl(window.location.pathname)) {
     return;
@@ -76,7 +75,6 @@ window.addEventListener('scroll', () => {
   lastScrollY = window.scrollY;
 });
 
-// Cache header elements
 const homeButton = document.getElementById('home');
 const menu = document.getElementById('header-menu');
 const menuOptions = Array.from(menu.children);
