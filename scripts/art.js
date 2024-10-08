@@ -7,7 +7,7 @@
 export function onImageClick(callback) {
   const images = document.getElementById('gallery').children;
 
-  const clickThreshold = 6; // In pixels; if the dragged distance is less than this, it is a click.
+  const dragThreshold = 6; // In pixels; if the dragged distance is less than this, it is a click.
   let startX;
   let startY;
 
@@ -20,7 +20,7 @@ export function onImageClick(callback) {
     const draggedX = Math.abs(event.pageX - startX);
     const draggedY = Math.abs(event.pageY - startY);
 
-    if (draggedX < clickThreshold && draggedY < clickThreshold) {
+    if (draggedX < dragThreshold && draggedY < dragThreshold) {
       callback(event.target);
     }
   };
