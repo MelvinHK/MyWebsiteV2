@@ -1,8 +1,8 @@
 /**
- * Since the gallery can be drag scrolled, default click listeners will not suffice.
- * This function will differentiate between drag+release and clicks on the images.
+ * This function differentiates between drag+release and clicks on the images,
+ * since the gallery can be drag-scrolled.
  * 
- * @param {function(Element)} callback - A callback for when an image is clicked.
+ * @param {function(HTMLImageElement)} callback - A callback for when an image is clicked.
  */
 export function onImageClick(callback) {
   const images = document.getElementById('gallery').children;
@@ -35,7 +35,7 @@ export function onImageClick(callback) {
 }
 
 /**
- * @param {Element} image 
+ * @param {HTMLImageElement} image 
  */
 export function enlargeImage(image) {
   console.log(image.src);

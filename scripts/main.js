@@ -27,27 +27,35 @@ barba.init({
 });
 
 /**
- * @param {string} url 
+ * Initialize pages' scripts if any. 
+ * Ensure that the key values match the corresponding "data-barba-namespace" values in .html files.
  */
-function isHomeUrl(url) {
-  return ['/', '/index.html'].includes(url);
-}
+const pageScripts = {
+  "Digital Art": () => {
+    enableDragScroll(document.getElementById('gallery'));
+    onImageClick((image) => enlargeImage(image));
+  }
+};
 
 /**
- * Return animations here, and initialize individual pages' scripts.
+ * Return animations here, and call individual pages' scripts.
  */
 function init(data) {
   const nextNamespace = data.next.namespace;
 
-  if (nextNamespace === "Digital Art") {
-    enableDragScroll(document.getElementById('gallery'));
-    onImageClick((image) => enlargeImage(image));
-  }
+  pageScripts[nextNamespace]?.();
 
   return [
     hideHeader(isHomeUrl(data.next.url.path)),
     indicateSelectedMenuOption(nextNamespace)
   ];
+}
+
+/**
+ * @param {string} url 
+ */
+function isHomeUrl(url) {
+  return ['/', '/index.html'].includes(url);
 }
 
 let lastScrollY = 0;
