@@ -17,14 +17,26 @@ barba.init({
         ease: 'power1.in'
       });
     },
+    // On page transition
     enter(data) {
-      return init(data);
+      return animations(data);
     },
+    // On browser load
     once(data) {
-      return init(data);
+      return animations(data);
     }
   }],
 });
+
+/**
+ * Return animations here
+ */
+function animations(data) {
+  return [
+    hideHeader(isHomeUrl(data.next.url.path)),
+    indicateSelectedMenuOption(data.next.namespace)
+  ];
+}
 
 /**
  * Initialize pages' scripts if any. 
@@ -37,19 +49,14 @@ const pageScripts = {
   }
 };
 
-/**
- * Return animations here, and call individual pages' scripts.
- */
-function init(data) {
-  const nextNamespace = data.next.namespace;
+barba.hooks.enter((data) => {
+  window.scrollTo(0, 0);
+  pageScripts[data.next.namespace]?.();
+});
 
-  pageScripts[nextNamespace]?.();
-
-  return [
-    hideHeader(isHomeUrl(data.next.url.path)),
-    indicateSelectedMenuOption(nextNamespace)
-  ];
-}
+barba.hooks.once((data) => {
+  pageScripts[data.next.namespace]?.();
+});
 
 /**
  * @param {string} url 

@@ -154,6 +154,7 @@
   user-select: none;
 }
 
+/* Navlink underline */
 #header-menu a::after {
   position: absolute;
   content: "";
@@ -168,6 +169,7 @@
   width: 1rem;
 }
 
+/* Home button */
 #home {
   display: flex;
   width: 50px;
@@ -237,4 +239,8 @@
 .link {
   text-decoration: underline;
   color: var(--link-col);
+}
+
+.text-center {
+  text-align: center;
 }
