@@ -28,9 +28,6 @@ barba.init({
   }],
 });
 
-/**
- * Return animations here
- */
 function animations(data) {
   return [
     hideHeader(isHomeUrl(data.next.url.path)),
