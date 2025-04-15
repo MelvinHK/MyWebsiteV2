@@ -106,9 +106,10 @@ function hideHeader(condition = true) {
 }
 
 function indicateSelectedMenuOption(nextNamespace) {
-  const matchingOptionAnimation = (nextNamespace === 'Home')
+  const matchingElement = document.getElementById(nextNamespace);
+  const matchingOptionAnimation = (nextNamespace === 'Home' || !matchingElement)
     ? null
-    : gsap.set(document.getElementById(nextNamespace), {
+    : gsap.set(matchingElement, {
       '--header-menu-a-width': '1rem'
     });
 
