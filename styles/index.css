@@ -248,3 +248,24 @@
 .no-select {
   user-select: none;
 }
+
+/* .animated-underline {
+  position: relative;
+}
+
+.animated-underline::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  content: "";
+  border-bottom: 2px solid var(--font-col);
+  width: 100%;
+  transform: scaleX(0);
+  height: 1.2rem;
+  transition: transform 0.35s;
+}
+
+.animated-underline:hover::after,
+.animated-underline:focus::after {
+  transform: scaleX(1);
+} */
