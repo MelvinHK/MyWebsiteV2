@@ -224,6 +224,7 @@
 
 #gallery img {
   height: 100%;
+  user-select: none;
 }
 
 #gallery-spacer {
